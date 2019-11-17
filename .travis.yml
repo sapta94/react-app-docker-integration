@@ -4,3 +4,6 @@ services:
 
 before_install:
   - docker build -t sapta94/myapp -f Dockerfile.dev .
+
+script:
+  - docker run sapta/myapp npm run test -- --coverage
