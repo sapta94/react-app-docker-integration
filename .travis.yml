@@ -9,6 +9,7 @@ script:
   - docker run -e CI=true sapta94/myapp npm run test
 
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: "ap-south-1"
   app: "docker-react"
@@ -18,5 +19,4 @@ deploy:
   on:
     branch: master
   access_key_id: $access-key
-  secret_access_key:
-      secure: $secret-key
+  secret_access_key: $secret-key
