@@ -16,10 +16,17 @@ class Home extends Component {
             boxes:boxes
         })
     }
+    handleAdd = () =>{
+        let boxes = this.state.boxes;
+        boxes.push('')
+        this.setState({
+            boxes:boxes
+        })
+    }
     render() {
         var boxes = this.state.boxes
         return (
-            <div className='row'>
+            <div style={{margin:'10px'}} className='row'>
                 {
                     boxes.map((item,index)=>{
                         return(
@@ -32,6 +39,8 @@ class Home extends Component {
                         )
                     })
                 }
+                <i style={{marginTop:'35px',cursor:"pointer"}} onClick={()=>this.handleAdd()} class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+
             </div>
             
         );
