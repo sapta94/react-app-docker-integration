@@ -29,7 +29,7 @@ class Home extends Component {
         let boxes = this.state.boxes;
         var respData = []
         boxes.forEach((item)=>{
-            axios.get('https://api.waqi.info/search/?token=33d91288c508e1bf94352896585a7576772645d5&keyword='+item).then((resp)=>{
+            axios.get('https://api.waqi.info/feed/'+item+'/?token='+process.env.token).then((resp)=>{
                 if(resp.status=='ok'){
                   respData.push(resp.data)
                 }
@@ -41,6 +41,7 @@ class Home extends Component {
     }
     render() {
         var boxes = this.state.boxes
+        console.log(process.env)
         return (
             <div>
                 <div style={{margin:'10px'}} className='row'>
