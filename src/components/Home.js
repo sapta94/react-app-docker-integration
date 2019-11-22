@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Button} from "react-bootstrap"
+import axios from 'axios'
 
 
 class Home extends Component {
@@ -23,24 +25,40 @@ class Home extends Component {
             boxes:boxes
         })
     }
+    onSubmit=()=>{
+        let boxes = this.state.boxes;
+        var respData = []
+        boxes.forEach((item)=>{
+            axios.get('https://api.waqi.info/search/?token=33d91288c508e1bf94352896585a7576772645d5&keyword='+item).then((resp)=>{
+                if(resp.status=='ok'){
+                  respData.push(resp.data)
+                }
+            }).catch(err=>{
+                console.log(err)
+                return
+            })
+        })
+    }
     render() {
         var boxes = this.state.boxes
         return (
-            <div style={{margin:'10px'}} className='row'>
-                {
-                    boxes.map((item,index)=>{
-                        return(
-                            <div className='col-md-3'>
-                                <div className="form-group">
-                                    <label for="usr">Enter a city:</label>
-                                    <input type="text" onChange={(e)=>this.changeValue(e,index)} className="form-control" value={item}/>
+            <div>
+                <div style={{margin:'10px'}} className='row'>
+                    {
+                        boxes.map((item,index)=>{
+                            return(
+                                <div className='col-md-3'>
+                                    <div className="form-group">
+                                        <label for="usr">Enter a city:</label>
+                                        <input type="text" onChange={(e)=>this.changeValue(e,index)} className="form-control" value={item}/>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
-                <i style={{marginTop:'35px',cursor:"pointer"}} onClick={()=>this.handleAdd()} class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-
+                            )
+                        })
+                    }
+                    <i style={{marginTop:'35px',cursor:"pointer"}} onClick={()=>this.handleAdd()} class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+                </div>
+                <Button variant="primary" onClick={()=>this.onSubmit()}>Submit</Button>
             </div>
             
         );
