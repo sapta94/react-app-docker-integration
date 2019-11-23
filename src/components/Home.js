@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import {Button} from "react-bootstrap"
 import axios from 'axios'
 import key from "./key"
+import ChartView from "./chart-view"
+
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            boxes:['','']
+            boxes:['',''],
+            pollutionData:[]
         };
     }
     changeValue=(e,index)=>{
@@ -31,10 +34,15 @@ class Home extends Component {
         let token = (process.env.NODE_ENV=='development')?(key.TOKEN):process.env.TOKEN
         console.log('token is ',token)
         var respData = []
-        boxes.forEach((item)=>{
+        boxes.forEach((item,ind)=>{
             axios.get('https://api.waqi.info/feed/'+item+'/?token='+token).then((resp)=>{
                 if(resp.status=='ok'){
                   respData.push(resp.data)
+                }
+                if(ind==boxes.length-1){
+                    this.setState({
+                        pollutionData:respData
+                    })
                 }
             }).catch(err=>{
                 console.log(err)
@@ -62,6 +70,7 @@ class Home extends Component {
                     <i style={{marginTop:'35px',cursor:"pointer"}} onClick={()=>this.handleAdd()} class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
                 </div>
                 <Button variant="primary" onClick={()=>this.onSubmit()}>Submit</Button>
+                {(this.state.pollutionData.length>0)?<ChartView pollutionData={this.state.pollutionData}/>:null}
             </div>
             
         );
