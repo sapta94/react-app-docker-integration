@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from "react-bootstrap"
 import axios from 'axios'
+import key from "./key"
 
 
 class Home extends Component {
@@ -27,9 +28,11 @@ class Home extends Component {
     }
     onSubmit=()=>{
         let boxes = this.state.boxes;
+        let token = (process.env.NODE_ENV=='development')?(key.TOKEN):process.env.TOKEN
+        console.log('token is ',token)
         var respData = []
         boxes.forEach((item)=>{
-            axios.get('https://api.waqi.info/feed/'+item+'/?token='+process.env.token).then((resp)=>{
+            axios.get('https://api.waqi.info/feed/'+item+'/?token='+token).then((resp)=>{
                 if(resp.status=='ok'){
                   respData.push(resp.data)
                 }
@@ -41,7 +44,6 @@ class Home extends Component {
     }
     render() {
         var boxes = this.state.boxes
-        console.log(process.env)
         return (
             <div>
                 <div style={{margin:'10px'}} className='row'>
