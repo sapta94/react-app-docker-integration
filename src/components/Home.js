@@ -38,7 +38,6 @@ class Home extends Component {
                 if(resp.data.status=='ok'){
                   respData.push(resp.data.data)
                 }
-              
                 if(ind==boxes.length-1){
                     this.setState({
                         pollutionData:respData
