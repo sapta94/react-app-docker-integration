@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from "react-bootstrap"
 import axios from 'axios'
-import key from "./key"
+
 import ChartView from "./chart-view"
 
 
