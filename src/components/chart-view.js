@@ -92,7 +92,7 @@ class ChartView extends Component {
     render() {
         return (
             <div className="row graph-card">
-                <h3 style={{marginLeft:'0.2 rem'}}>Results</h3>
+                <h3 style={{marginLeft:'0.3 rem'}}>Results</h3>
                 <div className='graphType'>
                     <label><input onChange={()=>this.handleChange('bar')} type="radio" class="radio-inline" name="graph-type"/> Bar</label>
                     <label><input onChange={()=>this.handleChange('line')} type="radio" class="radio-inline" name="graph-type" /> Line</label>
