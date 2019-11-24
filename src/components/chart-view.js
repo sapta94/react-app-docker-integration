@@ -35,7 +35,6 @@ class ChartView extends Component {
 
     }
     render() {
-        console.log(this.state.graphData)
         return (
             <div className="row graph-card">
                 <h3 style={{marginLeft:'0.2 rem'}}>Results</h3>
