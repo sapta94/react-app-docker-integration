@@ -51,6 +51,7 @@ class Home extends Component {
     }
     render() {
         var boxes = this.state.boxes
+        console.log(process.env)
         return (
             <div>
                 <div style={{margin:'10px'}} className='row'>
