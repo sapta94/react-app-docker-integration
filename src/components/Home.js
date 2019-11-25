@@ -31,7 +31,7 @@ class Home extends Component {
     }
     onSubmit=()=>{
         let boxes = this.state.boxes;
-        let token = (process.env.NODE_ENV=='development')?(key.TOKEN):process.env.TOKEN
+        let token = (process.env.NODE_ENV=='development' && key)?(key.TOKEN):process.env.TOKEN
         var respData = []
         boxes.forEach((item,ind)=>{
             axios.get('https://api.waqi.info/feed/'+item+'/?token='+token).then((resp)=>{
