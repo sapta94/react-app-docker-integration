@@ -31,7 +31,7 @@ class Home extends Component {
     }
     onSubmit=()=>{
         let boxes = this.state.boxes;
-        let token = process.env.TOKEN
+        let token = process.env.key
         var respData = []
         boxes.forEach((item,ind)=>{
             axios.get('https://api.waqi.info/feed/'+item+'/?token='+token).then((resp)=>{
@@ -41,6 +41,7 @@ class Home extends Component {
                 if(ind==boxes.length-1){
                     this.setState({
                         pollutionData:respData
+
                     })
                 }
             }).catch(err=>{
